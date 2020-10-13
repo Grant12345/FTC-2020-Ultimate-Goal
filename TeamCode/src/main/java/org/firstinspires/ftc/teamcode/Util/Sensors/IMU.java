@@ -19,13 +19,13 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 public class IMU{
 
     //Gyro
-    public BNO055IMU imu;
-    public Orientation angles;
-    public Acceleration gravity;
+    public static BNO055IMU imu;
+    public static Orientation angles;
+    public static Acceleration gravity;
 
-    HardwareMap HwMap;
+    public static HardwareMap HwMap;
 
-    public void init(HardwareMap hwm){
+    public static void init(HardwareMap hwm){
         HwMap = hwm;
         //Initialize Gyro
         BNO055IMU.Parameters parameters1 = new BNO055IMU.Parameters();
@@ -62,7 +62,7 @@ public class IMU{
                 });
     }
 
-    void composeTelemetry () {
+    public static void composeTelemetry () {
 
         telemetry.addAction(new Runnable() {
             @Override
@@ -122,11 +122,11 @@ public class IMU{
                 });
     }
 
-    String formatAngle(AngleUnit angleUnit, double angle) {
+    static String formatAngle(AngleUnit angleUnit, double angle) {
         return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
     }
 
-    String formatDegrees(double degrees) {
+    static String formatDegrees(double degrees) {
         return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
 }

@@ -10,16 +10,16 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 
 public class DriveTrain {
 
-    HardwareMap HwMap;
+    public static HardwareMap HwMap;
 
     //Motor Declarations
-    public DcMotor leftFrontMotor;
-    public DcMotor leftBackMotor;
-    public DcMotor rightFrontMotor;
-    public DcMotor rightBackMotor;
+    public static DcMotor leftFrontMotor;
+    public static DcMotor leftBackMotor;
+    public static DcMotor rightFrontMotor;
+    public static DcMotor rightBackMotor;
 
 
-    public void init(HardwareMap hwm){
+    public static void init(HardwareMap hwm){
         HwMap = hwm;
         leftFrontMotor = HwMap.dcMotor.get("leftFrontMotor");
         leftBackMotor = HwMap.dcMotor.get("leftBackMotor");
@@ -92,26 +92,26 @@ public class DriveTrain {
         }
     }
 
-//    public void Turn(String input, double power, int degrees){
-//        telemetry.addData("heading", IMU.a);
-//        telemetry.update();
-//        if(input.equals("TURN_LEFT")){
-//            while (IMU.angles) {
-//                this.leftFrontMotor.setPower(-power);
-//                this.leftBackMotor.setPower(-power);
-//                this.rightFrontMotor.setPower(-power);
-//                this.rightBackMotor.setPower(-power);
-//            }
-//        }
-//        if(input.equals("TURN_RIGHT")){
-//            while (IMU.angles) {
-//                this.leftFrontMotor.setPower(-power);
-//                this.leftBackMotor.setPower(-power);
-//                this.rightFrontMotor.setPower(-power);
-//                this.rightBackMotor.setPower(-power);
-//            }
-//        }
-//    }
+    public void Turn(String input, double power, int degrees){
+        telemetry.addData("heading", IMU.angles);
+        telemetry.update();
+        if(input.equals("TURN_LEFT")){
+            while (IMU.angles.firstAngle < degrees) {
+                this.leftFrontMotor.setPower(-power);
+                this.leftBackMotor.setPower(-power);
+                this.rightFrontMotor.setPower(power);
+                this.rightBackMotor.setPower(power);
+            }
+        }
+        if(input.equals("TURN_RIGHT")){
+            while (IMU.angles.firstAngle > degrees) {
+                this.leftFrontMotor.setPower(power);
+                this.leftBackMotor.setPower(power);
+                this.rightFrontMotor.setPower(-power);
+                this.rightBackMotor.setPower(-power);
+            }
+        }
+    }
     public void setRunMode(String input) {
         if (input.equals("STOP_AND_RESET_ENCODER")) {
             this.leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
