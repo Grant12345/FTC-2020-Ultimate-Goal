@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Util.*;
 import org.firstinspires.ftc.teamcode.Util.Sensors.*;
 import org.firstinspires.ftc.teamcode.Subsystems.*;
 
-
+@TeleOp(name = "TeleOp-Test", group = "TeleOp")
 public class Teleop extends LinearOpMode {
 
     public void runOpMode(){
